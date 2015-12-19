@@ -143,7 +143,7 @@
       document.addEventListener("keydown", keyDownHandler, false);
       document.addEventListener("keyup", keyUpHandler, false);
       document.addEventListener("mousemove", mouseMoveHandler, false);
-      canvas.addEventListener("touchmove", touchMoveHandler, false);
+      document.addEventListener("touchmove", touchMoveHandler, false);
 
       function keyDownHandler(e) {
         if(e.keyCode == 39) {
@@ -171,7 +171,9 @@
       function touchMoveHandler(e) {
         e.preventDefault();
         var relativeX = e.pageX;
-        paddleX = relativeX;
+        if (relativeX > 0 && relativeX < canvas.width) {
+          paddleX = relativeX - paddleWidth/2;
+        }
       }
 
       function collisionDetection() {
